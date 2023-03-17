@@ -2,6 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import { WeatherLog } from "./WeatherLog/WeatherLog";
 import { Form } from "./Form/Form";
+const apiKey = process.env.REACT_APP_API_KEY;
 class App extends Component {
   state = {
     value: "",
@@ -15,7 +16,7 @@ class App extends Component {
   };
 
   handleSubmit = (e) => {
-    const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=bc33340834a92b210a8610442f99f508&lang=pl&units=metric`;
+    const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${apiKey}&lang=pl&units=metric`;
 
     e.preventDefault();
     console.log("Test");
