@@ -5,7 +5,6 @@ import { Form } from "./Form/Form";
 class App extends Component {
   state = {
     value: "",
-    date: "",
     city: "",
     sunrise: "",
     sunset: "",
@@ -30,18 +29,19 @@ class App extends Component {
       })
       .then((response) => response.json())
       .then((data) => {
-        this.setState((prevState) => ({
+        console.log(data);
+        this.setState({
           err: false,
           city: this.state.value,
           sunrise: data.sys.sunrise,
-          sunset: data.sys.sunrise,
+          sunset: data.sys.sunset,
           temp: data.main.temp,
           pressure: data.main.pressure,
-          wind: data.wind,
-        }));
+          wind: data.wind.speed,
+        });
       })
       .catch((err) => {
-        this.setState({ err: true });
+        this.setState((prevState) => ({ err: true, city: prevState.value }));
       });
   };
 
@@ -60,7 +60,7 @@ class App extends Component {
           change={this.handleInputChange}
           submit={this.handleSubmit}
         ></Form>
-        <WeatherLog error={this.state.err}></WeatherLog>
+        <WeatherLog weather={this.state}></WeatherLog>
       </div>
     );
   }
