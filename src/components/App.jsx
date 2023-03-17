@@ -23,14 +23,12 @@ class App extends Component {
     fetch(API)
       .then((response) => {
         if (response.ok) {
-          console.log(response);
           return response;
         }
         throw Error("Błąd");
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           err: false,
           city: this.state.value,
