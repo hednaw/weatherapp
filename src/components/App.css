@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -8,4 +9,25 @@
 }
 Form {
   margin-top: 2em;
+}
+
+
+@media screen and (max-width: 640px){
+  Form, WeatherLog {
+    margin: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+Form {flex-direction: row;}
+.App {
+  position: relative;
+  height: 500px;
+  top: 30vh;
+  /* border: 1px solid black; */
+}
+
 }
