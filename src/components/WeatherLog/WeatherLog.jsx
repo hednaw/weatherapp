@@ -1,29 +1,37 @@
 import React from "react";
-const WeatherLog = (props) => {
-  const { err, city, sunrise, sunset, temp, pressure, wind } = props.weather;
-  let content = null;
 
-  const sunriseString = new Date(sunrise * 1000).toLocaleTimeString();
-  const sunsetString = new Date(sunset * 1000).toLocaleTimeString();
-  if (!err && city) {
-    content = (
-      <>
-        <ul className="list-group">
-          <li className="list-group-item">{city}</li>
-          <li className="list-group-item">Temperatura: {temp}&#176;C</li>
-          <li className="list-group-item">Wschód słońca: {sunriseString}</li>
-          <li className="list-group-item">Zachód słońca: {sunsetString}</li>
-          <li className="list-group-item">Ciśnienie: {pressure} hPa</li>
-          <li className="list-group-item">Prędkość wiatru: {wind} m/s</li>
-        </ul>
-      </>
-    );
-  }
+const WeatherLog = ({ weather }) => {
+  const { err, city } = weather;
 
   return (
     <div>
-      <p>{err ? `Nie mamy w bazie miasta "${city}"` : content}</p>
+      {err ? (
+        <span>{`Nie mamy w bazie miasta "${city}"`}</span>
+      ) : (
+        !err && city && <Component weather={{ ...weather }} />
+      )}
     </div>
+  );
+};
+
+const getToLocaleTimeString = (arg) =>
+  new Date(arg * 1000).toLocaleTimeString();
+const Component = ({
+  weather: { city, sunrise, sunset, temp, pressure, wind },
+}) => {
+  return (
+    <ul className="list-group">
+      <li className="list-group-item">{city}</li>
+      <li className="list-group-item">Temperatura: {temp}&#176;C</li>
+      <li className="list-group-item">
+        Wschód słońca: {getToLocaleTimeString(sunrise)}
+      </li>
+      <li className="list-group-item">
+        Zachód słońca: {getToLocaleTimeString(sunset)}
+      </li>
+      <li className="list-group-item">Ciśnienie: {pressure} hPa</li>
+      <li className="list-group-item">Prędkość wiatru: {wind} m/s</li>
+    </ul>
   );
 };
 
