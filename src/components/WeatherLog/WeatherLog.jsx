@@ -6,7 +6,7 @@ const WeatherLog = ({ weather }) => {
   return (
     <div>
       {err ? (
-        <span>{`Nie mamy w bazie miasta "${city}"`}</span>
+        <span>Nie mamy w bazie miasta "{city}"</span>
       ) : (
         !err && city && <Component weather={{ ...weather }} />
       )}
