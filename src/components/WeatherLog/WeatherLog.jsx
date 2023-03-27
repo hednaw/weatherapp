@@ -3,9 +3,9 @@ const WeatherLog = (props) => {
   const { err, city, sunrise, sunset, temp, pressure, wind } = props.weather;
   let content = null;
 
+  const sunriseString = new Date(sunrise * 1000).toLocaleTimeString();
+  const sunsetString = new Date(sunset * 1000).toLocaleTimeString();
   if (!err && city) {
-    const sunriseString = new Date(sunrise * 1000).toLocaleTimeString();
-    const sunsetString = new Date(sunset * 1000).toLocaleTimeString();
     content = (
       <>
         <ul className="list-group">
@@ -19,6 +19,7 @@ const WeatherLog = (props) => {
       </>
     );
   }
+
   return (
     <div>
       <p>{err ? `Nie mamy w bazie miasta "${city}"` : content}</p>

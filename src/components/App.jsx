@@ -4,22 +4,24 @@ import { WeatherLog } from "./WeatherLog/WeatherLog";
 import { Form } from "./Form/Form";
 const apiKey = process.env.REACT_APP_API_KEY;
 class App extends Component {
-  state = {
-    value: "",
-    city: "",
-    sunrise: "",
-    sunset: "",
-    temp: "",
-    pressure: "",
-    wind: "",
-    err: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      city: "",
+      sunrise: "",
+      sunset: "",
+      temp: "",
+      pressure: "",
+      wind: "",
+      err: false,
+    };
+  }
 
   handleSubmit = (e) => {
     const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${apiKey}&lang=pl&units=metric`;
 
     e.preventDefault();
-    console.log("Test");
     fetch(API)
       .then((response) => {
         if (response.ok) {
